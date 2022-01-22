@@ -503,7 +503,92 @@ hexo d #发布<span aria-hidden="true" class="line-numbers-rows"><span></span><s
 </ul>
 <p><strong>至此博客搭建完毕</strong></p>
 <h4 id="增加主题"><a href="#增加主题" class="headerlink" title="增加主题"></a>增加主题</h4><p>本博客使用的是hexo-theme-matery,具体查看<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">Github地址</a></p>
-<p>*** 华丽的分界线 ***</p>
+<hr>
+<center> 华丽的分界线 </center>
+
+<hr>
+<h3 id="写第一个博客"><a href="#写第一个博客" class="headerlink" title="写第一个博客"></a>写第一个博客</h3><p>部署之后我们来开始写第一篇文章，内容分为三类，分别是草稿、文章和页面，此处只记录草稿<code>post</code>，</p>
+<h4 id="创建一个新的文章"><a href="#创建一个新的文章" class="headerlink" title="创建一个新的文章"></a>创建一个新的文章</h4><ul>
+<li><p>使用hexo命令，后面接文章的命名，如‘test’</p>
+<pre class="line-numbers language-none"><code class="language-none">$ hexo new post test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>之后可以在<code>./source/_post</code>内看到新建的md文件</p>
+</li>
+<li><p>编辑md，使用markdown打开，两个<code>--</code>之间的就是文章的属性，主要的选项功能如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置选项</th>
+<th align="left">默认值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">title</td>
+<td align="left">Markdown文章名</td>
+<td align="left">文章的标题</td>
+</tr>
+<tr>
+<td align="left">date</td>
+<td align="left">time</td>
+<td align="left">发布时间，强烈建议填写此选项，且最好保证全局唯一</td>
+</tr>
+<tr>
+<td align="left">author</td>
+<td align="left">none</td>
+<td align="left">文章作者</td>
+</tr>
+<tr>
+<td align="left">top</td>
+<td align="left">false</td>
+<td align="left">推荐文章（文章是否置顶），如果 top 值为 true，则会作为首页推荐文章</td>
+</tr>
+<tr>
+<td align="left">hide</td>
+<td align="left">false</td>
+<td align="left">隐藏文章，如果hide值为true，则文章不会在首页显示</td>
+</tr>
+<tr>
+<td align="left">cover</td>
+<td align="left">false</td>
+<td align="left">表示该文章是否需要加入到首页轮播封面中</td>
+</tr>
+<tr>
+<td align="left">mathjax</td>
+<td align="left">none</td>
+<td align="left">是否开启数学公式支持 ，本文章是否开启 mathjax，且需要在主题的 _config.yml 文件中也需要开启才行</td>
+</tr>
+<tr>
+<td align="left">summary</td>
+<td align="left">none</td>
+<td align="left">文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要</td>
+</tr>
+<tr>
+<td align="left">categories</td>
+<td align="left">none</td>
+<td align="left">文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类</td>
+</tr>
+<tr>
+<td align="left">tags</td>
+<td align="left">none</td>
+<td align="left">文章标签，一篇文章可以多个标签</td>
+</tr>
+</tbody></table>
+<p>  例如：</p>
+  <pre class="line-numbers language-none"><code class="language-none">title: test
+date: 2022-01-22 16:43:04
+author: Jingtao Fan
+top: false 
+cover: false
+hide: false
+categories: cat
+mathjax: false
+summary: This is a summary
+tags: 
+  - first
+  - second<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p>** 如此就可以开始写你的第一篇文章辣 **</p>
 
                 
             </div>
