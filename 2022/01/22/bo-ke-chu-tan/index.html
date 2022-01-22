@@ -387,8 +387,12 @@ STAR-&amp;gt;&amp;gt;&amp;g">
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/blog-%E5%85%A5%E9%97%A8/">
-                                <span class="chip bg-color">-blog -入门</span>
+                            <a href="/tags/blog/">
+                                <span class="chip bg-color">blog</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%85%A5%E9%97%A8/">
+                                <span class="chip bg-color">入门</span>
                             </a>
                         
                     </div>
@@ -447,7 +451,8 @@ STAR-&amp;gt;&amp;gt;&amp;g">
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <p>马上就是新年了，我也即将研二下学期，准备为实习做些东西、学点东西，于是开始写博客记录一下过程，第一次搭建博客，也走了不少弯路，花了不少时间，先介绍一哈我的电脑是mac的，全程使用的终端，部署在github上。</p>
-<h2 id="STAR-gt-gt-gt"><a href="#STAR-gt-gt-gt" class="headerlink" title="STAR-&gt;&gt;&gt;"></a>STAR-&gt;&gt;&gt;</h2><h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><h4 id="Github的创建以及Git的安装"><a href="#Github的创建以及Git的安装" class="headerlink" title="Github的创建以及Git的安装"></a><code>Github</code>的创建以及<code>Git</code>的安装</h4><p>这是基本，计算机er都会-&gt;</p>
+<p><strong>STAR-&gt;&gt;&gt;</strong></p>
+<h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><h4 id="Github的创建以及Git的安装"><a href="#Github的创建以及Git的安装" class="headerlink" title="Github的创建以及Git的安装"></a><code>Github</code>的创建以及<code>Git</code>的安装</h4><p>这是基本，计算机er都会-&gt;</p>
 <h4 id="nodejs和hexo的安装"><a href="#nodejs和hexo的安装" class="headerlink" title="nodejs和hexo的安装"></a><code>nodejs</code>和<code>hexo</code>的安装</h4><ul>
 <li><p><code>nodejs</code><a target="_blank" rel="noopener" href="https://nodejs.org/en/">官网下载</a>,进去后选择自己的系统下载即可</p>
 </li>
@@ -468,34 +473,32 @@ $ cd blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
 </li>
 </ul>
 <h4 id="部署博客到Github"><a href="#部署博客到Github" class="headerlink" title="部署博客到Github"></a>部署博客到<code>Github</code></h4><ul>
-<li><p>在<code>Github</code>创建新的仓库，命名为‘你的<code>github</code>名字‘.github.io<br><img src="./%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/1.jpg" alt="图片">  </p>
+<li><p>在<code>Github</code>创建新的仓库，命名为‘你的<code>github</code>名字‘.github.io<br><img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/1.jpg" alt="图片">  </p>
 </li>
 <li><p>绑定<code>ssh key</code></p>
 <p>1.确定你的电脑是否有<code>ssh key</code></p>
   <pre class="line-numbers language-none"><code class="language-none">$ cd ~&#x2F;.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>  如果找不到文件夹就是不存在进入步骤2，存在则进入步骤3</p>
 <p>2.创建一个<code>ssh key</code></p>
-  <pre class="line-numbers language-none"><code class="language-none">    $ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;&#96;
-    &#96;&#96;&#96;&#96;
-    之后的设置是设置密码和位置一类的，直接回车即可，想要设置的也可以查看参数自己设置
-   
-  3.复制你的&#96;ssh key&#96;到&#96;github上&#96;,路径为&#96;~&#x2F;.ssh&#x2F;id_rsa.pub&#96;，随后登陆你的github，在右上的个人中添加公钥
-    
-    ![图片](.&#x2F;博客初探&#x2F;2.jpg)
-    
-    点击&#96;new&#96;即可
-* 在博客的目录下修改&#96;_config.yml&#96;来更改博客的配置
-  
-  1.打开配置文件
-    &#96;$ vim _config.yml&#96;
-
-  2.&#96;G&#96;到底部，修改url为你的github地址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  deploy:<br>  type: git<br>  repository: <a href="mailto:&#103;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;">&#103;&#105;&#x74;&#64;&#103;&#105;&#x74;&#x68;&#x75;&#98;&#x2e;&#x63;&#111;&#109;</a>:Ian-Joh/Ian-Joh.github.io.git  #你的仓库SSH地址<br>  branch: main #你的分支</p>
-  <pre class="line-numbers language-none"><code class="language-none">* 部署博客到&#96;Github&#96;上
-&gt; 老三件套<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+  <pre class="line-numbers language-none"><code class="language-none">$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  之后的设置是设置密码和位置一类的，直接回车即可，想要设置的也可以查看参数自己设置</p>
+<p>3.复制你的<code>ssh key</code>到<code>github上</code>,路径为<code>~/.ssh/id_rsa.pub</code>，随后登陆你的github，在右上的个人中添加公钥</p>
+<p>  <img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/2.jpg" alt="图片"></p>
+<p>  点击<code>new</code>即可</p>
+</li>
+<li><p>在博客的目录下修改<code>_config.yml</code>来更改博客的配置</p>
+<p>1.打开配置文件<br>  <code>$ vim _config.yml</code></p>
+<p>2.<code>G</code>到底部，修改url为你的github地址</p>
+  <pre class="line-numbers language-none"><code class="language-none">deploy:
+type: git
+repository: git@github.com:Ian-Joh&#x2F;Ian-Joh.github.io.git  #你的仓库SSH地址
+branch: main #你的分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>部署博客到<code>Github</code>上</p>
 <blockquote>
-<p>hexo clean #清除文件<br>hexo g #静态部署<br>hexo d #发布<br>```</p>
-</blockquote>
+<p>老三件套</p>
+<pre class="line-numbers language-none"><code class="language-none">hexo clean #清除文件
+hexo g #静态部署
+hexo d #发布<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></blockquote>
 </li>
 </ul>
 <p><strong>至此博客搭建完毕</strong></p>
@@ -515,8 +518,12 @@ $ cd blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/blog-%E5%85%A5%E9%97%A8/">
-                                    <span class="chip bg-color">-blog -入门</span>
+                                <a href="/tags/blog/">
+                                    <span class="chip bg-color">blog</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%85%A5%E9%97%A8/">
+                                    <span class="chip bg-color">入门</span>
                                 </a>
                             
                         </div>
@@ -604,8 +611,12 @@ $ cd blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span><
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/blog-%E5%85%A5%E9%97%A8/">
-                        <span class="chip bg-color">-blog -入门</span>
+                    <a href="/tags/blog/">
+                        <span class="chip bg-color">blog</span>
+                    </a>
+                    
+                    <a href="/tags/%E5%85%A5%E9%97%A8/">
+                        <span class="chip bg-color">入门</span>
                     </a>
                     
                 </div>
