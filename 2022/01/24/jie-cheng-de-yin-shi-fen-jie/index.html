@@ -445,22 +445,22 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="对于已知的n，可以通过以下公式求出因子的个数"><a href="#对于已知的n，可以通过以下公式求出因子的个数" class="headerlink" title="对于已知的n，可以通过以下公式求出因子的个数"></a>对于已知的<code>n</code>，可以通过以下公式求出因子的个数</h3><pre><code><pre class="line-numbers language-none"><code class="language-none">cnt &#x3D; n &#x2F; a + n &#x2F; a^2 + n &#x2F; a^3 + ........<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-代码如下：
-
-<pre class="line-numbers language-none"><code class="language-none">int display(int n, int a) &#123;
+                <h3 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h3><ul>
+<li><p>对于已知的<code>n</code>，可以通过以下公式求出因子的个数</p>
+  <pre class="line-numbers language-none"><code class="language-none">cnt &#x3D; n &#x2F; a + n &#x2F; a^2 + n &#x2F; a^3 + ........<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>代码如下：</p>
+  <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int display(int n, int a) &#123;
    	int ans &#x3D; 0;
        while (n)&#123;
            ans +&#x3D; n &#x2F; a;
            n &#x2F;&#x3D; a;
        &#125;
        return ans;
-   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</code></pre>
+   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 <h3 id="例子：leetcode-172-阶乘后的零"><a href="#例子：leetcode-172-阶乘后的零" class="headerlink" title="例子：leetcode 172. 阶乘后的零"></a>例子：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">leetcode 172. 阶乘后的零</a></h3><blockquote>
 <p>   对于此题就是求阶乘数<code>10</code>的因子个数，而<code>10 = 2 x 5</code>,所以只用求出阶乘里<code>2</code>和<code>5</code>两个因子中最少那一个的个数，在&gt;<code>10</code>以内只有一个<code>5</code>,而<code>2</code> <code>4</code> <code>6</code> <code>8</code>都会有<code>2</code>这个因子，故只用求阶乘中<code>5</code>的因子个数即可，</p>
-   <pre class="line-numbers language-none"><code class="language-none">int trailingZeroes(int n) &#123;
+   <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">int trailingZeroes(int n) &#123;
      int ans &#x3D; 0;
      while (n)&#123;
          ans +&#x3D; n &#x2F; 5;
@@ -471,7 +471,7 @@
 </blockquote>
 <h3 id="进阶：leetcode-793-阶乘函数后-K-个零"><a href="#进阶：leetcode-793-阶乘函数后-K-个零" class="headerlink" title="进阶：leetcode 793.阶乘函数后 K 个零"></a>进阶：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/preimage-size-of-factorial-zeroes-function/">leetcode 793.阶乘函数后 K 个零</a></h3><blockquote>
 <p>   此题在栗子的基础之上，对于阶乘<code>n</code>是不确定的，需要找到所有末尾<code>0</code>的个数为<code>K</code>的<code>n</code>的个数，为了不超时，我在此处使&gt;用了二分查找，时间复杂度为<code>O(log(n))</code>,而计算<code>0</code>的个数的时间复杂度为<code>O(n)</code>,总时间复杂度为<code>O(nlog(n))</code></p>
-   <pre class="line-numbers language-none"><code class="language-none">   typedef long long int LL;
+   <pre class="line-numbers language-c++" data-language="c++"><code class="language-c++">  typedef long long int LL;
 class Solution &#123;
 public:
     int preimageSizeFZF(int k) &#123;
