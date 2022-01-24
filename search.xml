@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>阶乘的因式分解</title>
+      <link href="/2022/01/24/jie-cheng-de-yin-shi-fen-jie/"/>
+      <url>/2022/01/24/jie-cheng-de-yin-shi-fen-jie/</url>
+      
+        <content type="html"><![CDATA[<ul><li><p>对于已知的<code>n</code>，可以通过以下公式求出因子的个数</p>  <pre class="line-numbers language-none"><code class="language-none">cnt &#x3D; n &#x2F; a + n &#x2F; a^2 + n &#x2F; a^3 + ........<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><p>  代码如下：</p>  <pre class="line-numbers language-none"><code class="language-none">int display(int n, int a) &#123;   int ans &#x3D; 0;       while (n)&#123;           ans +&#x3D; n &#x2F; a;           n &#x2F;&#x3D; a;       &#125;       return ans;   &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>例子：<a href="https://leetcode-cn.com/problems/factorial-trailing-zeroes/">leetcode 172. 阶乘后的零</a></p><p>  对于此题就是求阶乘数<code>10</code>的因子个数，而<code>10 = 2 x 5</code>,所以只用求出阶乘里<code>2</code>和<code>5</code>两个因子中最少那一个的个数，在<code>10</code>以内只有一个<code>5</code>,而<code>2</code> <code>4</code> <code>6</code> <code>8</code>都会有<code>2</code>这个因子，故只用求阶乘中<code>5</code>的因子个数即可，</p>  <pre class="line-numbers language-none"><code class="language-none">int trailingZeroes(int n) &#123;    int ans &#x3D; 0;    while (n)&#123;        ans +&#x3D; n &#x2F; 5;        n &#x2F;&#x3D; 5;    &#125;    return ans;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li><li><p>进阶：<a href="https://leetcode-cn.com/problems/preimage-size-of-factorial-zeroes-function/">leetcode 793.阶乘函数后 K 个零</a></p></li></ul><pre><code>此题在栗子的基础之上，对于阶乘`n`是不确定的，需要找到所有末尾`0`的个数为`K`的`n`的个数，为了不超时，我在此处使用了二分查找，时间复杂度为`O(log(n))`,而计算`0`的个数的时间复杂度为`O(n)`,总时间复杂度为`O(nlog(n))`<pre class="line-numbers language-none"><code class="language-none">   typedef long long int LL;class Solution &#123;public:    int preimageSizeFZF(int k) &#123;        &#x2F;&#x2F;cout &lt;&lt; cal(k) &lt;&lt; &#39; &#39; &lt;&lt; f(cal(k)) &lt;&lt; endl;        &#x2F;&#x2F;cout &lt;&lt; cal(k - 1) &lt;&lt; &#39; &#39; &lt;&lt; f(cal(k - 1)) &lt;&lt; endl;        return cal(k) - cal(k - 1);    &#125;    LL f(LL x)&#123;        LL ans &#x3D; 0;        while (x)&#123;            ans +&#x3D; x &#x2F; 5;            x &#x2F;&#x3D; 5;        &#125;        return ans;    &#125;&#x2F;&#x2F;二分查找    LL cal(int k)&#123;         LL l &#x3D; -1, r &#x3D; 1e18;        while (l &lt; r)&#123;            LL mid &#x3D; l + r + 1 &gt;&gt; 1;            if (f(mid) &lt;&#x3D; k) l &#x3D; mid;            else r &#x3D; mid - 1;        &#125;        return r;    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学知识 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>排序非数字类型</title>
       <link href="/2022/01/23/zi-ding-yi-bi-jiao-han-shu/"/>
       <url>/2022/01/23/zi-ding-yi-bi-jiao-han-shu/</url>
