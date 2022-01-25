@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>摩尔投票</title>
+      <link href="/2022/01/25/mo-er-tou-piao/"/>
+      <url>/2022/01/25/mo-er-tou-piao/</url>
+      
+        <content type="html"><![CDATA[<h3 id="栗子：169-多数元素"><a href="#栗子：169-多数元素" class="headerlink" title="栗子：169. 多数元素"></a>栗子：<a href="https://leetcode-cn.com/problems/majority-element/">169. 多数元素</a></h3><ul><li><p>基本思路：</p><p>  对于题意而言，有一个数出现次数超过半数，那么这个数出现的次数减去其他所有数出现的次数和肯定是正数，故可以定义一个a来记录当前的数，定义一个cnt来记录当前数的相对个数，对数组内的数一次遍历而言</p><p>  1.若当前数为a，则cnt加1</p><p>  2.若当前的数不为a，则cnt减1，当cnt为0的时候，将a替换成当前的数，cnt重置为1</p><p>  遍历结束之后的a一定为数组中出现次数最多的数</p></li><li><p>代码：</p></li></ul><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;public:    int majorityElement(vector&lt;int&gt;&amp; nums) &#123;        int cnt &#x3D; 1, ans &#x3D; nums[0];&#x2F;&#x2F;初始的ans设置为第一个数，出现次数cnt为1        for (int i &#x3D; 1; i &lt; nums.size(); i ++ )&#123;            if (ans !&#x3D; nums[i])&#123;                cnt --;                if (cnt &lt; 0)&#123;                    cnt &#x3D; 1;                    ans &#x3D; nums[i];                &#125;            &#125; else cnt ++;        &#125;        return ans;    &#125;&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 选择 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>阶乘的因式分解</title>
       <link href="/2022/01/24/jie-cheng-de-yin-shi-fen-jie/"/>
       <url>/2022/01/24/jie-cheng-de-yin-shi-fen-jie/</url>
