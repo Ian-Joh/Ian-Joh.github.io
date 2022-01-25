@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="摩尔投票, Ian-Joh">
-    <meta name="description" content="要求O(1)的空间和O(n)的时间找到出现半数的数">
+    <meta name="keywords" content="通配符匹配, Ian-Joh">
+    <meta name="description" content="计算理论中自动机的闭包运算">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>摩尔投票 | Ian-Joh</title>
+    <title>通配符匹配 | Ian-Joh</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -265,12 +265,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">摩尔投票</h1>
+                    <h1 class="description center-align post-title">通配符匹配</h1>
                 </div>
             </div>
         </div>
@@ -386,8 +386,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E9%80%89%E6%8B%A9/">
-                                <span class="chip bg-color">选择</span>
+                            <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                <span class="chip bg-color">动态规划</span>
+                            </a>
+                        
+                            <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/">
+                                <span class="chip bg-color">计算理论</span>
                             </a>
                         
                     </div>
@@ -445,32 +449,34 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="栗子：leetcode-169-多数元素"><a href="#栗子：leetcode-169-多数元素" class="headerlink" title="栗子：leetcode:169. 多数元素"></a>栗子：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/majority-element/">leetcode:169. 多数元素</a></h3><ul>
-<li><p>基本思路：</p>
-<p>  对于题意而言，有一个数出现次数超过半数，那么这个数出现的次数减去其他所有数出现的次数和肯定是正数，故可以定义一个a来记录当前的数，定义一个cnt来记录当前数的相对个数，对数组内的数一次遍历而言</p>
-<p>  1.若当前数为a，则cnt加1</p>
-<p>  2.若当前的数不为a，则cnt减1，当cnt为0的时候，将a替换成当前的数，cnt重置为1</p>
-<p>  遍历结束之后的a一定为数组中出现次数最多的数</p>
-</li>
-<li><p>代码：</p>
-</li>
-</ul>
-<pre class="line-numbers language-none"><code class="language-none">class Solution &#123;
+                <h3 id="闭包运算"><a href="#闭包运算" class="headerlink" title="闭包运算*:"></a>闭包运算<code>*</code>:</h3><pre><code><pre class="line-numbers language-none"><code class="language-none">a* &#x3D; &#123;&#123;&#125;,&#123;a&#125;,&#123;aa&#125;,&#123;aaa&#125;.....&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+</code></pre>
+<h3 id="栗子：leetcode-44-通配符匹配"><a href="#栗子：leetcode-44-通配符匹配" class="headerlink" title="栗子：leetcode:44. 通配符匹配"></a>栗子：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wildcard-matching/">leetcode:44. 通配符匹配</a></h3><h3 id="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"><a href="#这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了" class="headerlink" title="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"></a>这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了</h3><h3 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h3><p>对于模式串<code>p</code>而言，只要有一种情况能与匹配串<code>s</code>匹配即可，即对于<code>s</code>当前的位置<code>i</code>而言，只需<code>s[0]</code>到<code>s[i-1]</code>已经匹配，并且<code>s[i]</code>可以匹配即可，故可以对双指针<code>i</code>和<code>j</code>分别对匹配串<code>s</code>和模式串<code>p</code>进行遍历，<code>dp[i][j]</code>代表<code>s</code>的前<code>i</code>个字符与<code>p</code>的前<code>j</code>个是否匹配，分为以下两种情况：</p>
+<pre><code>1.模式串当前位置`p[j]`不为`*`，则只需要`dp[i-1][j-1]`可以匹配，并且`s[i]`和`p[j]`相同或者`p[j]`为`?`
+2.模式串当前位置`p[j]`为`*`，则对于`p[j-1]`可以有0个或者多个，即`dp[i][j-1]`匹配(多个`p[j-1]`),或者`dp[i-1][j]`匹配(0个`p[j]`)
+</code></pre>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;
 public:
-    int majorityElement(vector&lt;int&gt;&amp; nums) &#123;
-        int cnt &#x3D; 1, ans &#x3D; nums[0];			&#x2F;&#x2F;初始的ans设置为第一个数，出现次数cnt为1
-        for (int i &#x3D; 1; i &lt; nums.size(); i ++ )&#123;
-            if (ans !&#x3D; nums[i])&#123;
-                cnt --;
-                if (cnt &lt; 0)&#123;
-                    cnt &#x3D; 1;
-                    ans &#x3D; nums[i];
+    bool isMatch(string s, string p) &#123;
+        int n &#x3D; s.size(), m &#x3D; p.size();
+        bool dp[n + 1][m + 1];
+        memset(dp, false, sizeof dp);
+        dp[0][0] &#x3D; true;
+        s &#x3D; &#39; &#39; + s;
+        p &#x3D; &#39; &#39; + p;
+
+        for (int i &#x3D; 0; i &lt;&#x3D; n; i ++ )&#123;
+            for (int j &#x3D; 1; j &lt;&#x3D; m; j ++ )&#123;
+                if (i &amp;&amp; p[j] !&#x3D; &#39;*&#39;) &#123;
+                    dp[i][j] &#x3D; dp[i - 1][j - 1] &amp;&amp; (s[i] &#x3D;&#x3D; p[j] || p[j] &#x3D;&#x3D; &#39;?&#39;);
+                &#125;else if (p[j] &#x3D;&#x3D; &#39;*&#39;) &#123;
+                    dp[i][j] &#x3D; dp[i][j - 1] || i &amp;&amp; dp[i - 1][j];&#x2F;&#x2F;为了i-1有意义故要加上判断i是否为0
                 &#125;
-            &#125; else cnt ++;
+            &#125;
         &#125;
-        return ans;
+        return dp[n][m];
     &#125;
-&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
@@ -484,8 +490,12 @@ public:
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E9%80%89%E6%8B%A9/">
-                                    <span class="chip bg-color">选择</span>
+                                <a href="/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+                                    <span class="chip bg-color">动态规划</span>
+                                </a>
+                            
+                                <a href="/tags/%E8%AE%A1%E7%AE%97%E7%90%86%E8%AE%BA/">
+                                    <span class="chip bg-color">计算理论</span>
                                 </a>
                             
                         </div>
@@ -533,9 +543,10 @@ public:
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/01/25/tong-pei-fu-pi-pei/">
                     <div class="card-image">
@@ -553,9 +564,9 @@ public:
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-25
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-25
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -568,6 +579,7 @@ public:
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -590,24 +602,24 @@ public:
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/24/jie-cheng-de-yin-shi-fen-jie/">
+                <a href="/2022/01/25/mo-er-tou-piao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="阶乘的因式分解">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="摩尔投票">
                         
-                        <span class="card-title">阶乘的因式分解</span>
+                        <span class="card-title">摩尔投票</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            用于求`n!`中有多少个因子a（常见的a为10）
+                            要求O(1)的空间和O(n)的时间找到出现半数的数
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-24
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-25
                             </span>
                         <span class="publish-author">
                             
@@ -624,8 +636,8 @@ public:
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E6%95%B0%E5%AD%A6%E7%9F%A5%E8%AF%86/">
-                        <span class="chip bg-color">数学知识</span>
+                    <a href="/tags/%E9%80%89%E6%8B%A9/">
+                        <span class="chip bg-color">选择</span>
                     </a>
                     
                 </div>
