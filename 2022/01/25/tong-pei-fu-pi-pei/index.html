@@ -449,10 +449,33 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="闭包运算"><a href="#闭包运算" class="headerlink" title="闭包运算*:"></a>闭包运算<code>*</code>:</h3><blockquote>
-<p>`a* = </p>
-</blockquote>
+                <h3 id="闭包运算"><a href="#闭包运算" class="headerlink" title="闭包运算*:"></a>闭包运算<code>*</code>:</h3><pre class="line-numbers language-none"><code class="language-none">a* &#x3D; &#123;&#123;&#125;,&#123;a&#125;,&#123;aa&#125;,&#123;aaa&#125;.....&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
+<h3 id="栗子：leetcode-44-通配符匹配"><a href="#栗子：leetcode-44-通配符匹配" class="headerlink" title="栗子：leetcode:44. 通配符匹配"></a>栗子：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/wildcard-matching/">leetcode:44. 通配符匹配</a></h3><h4 id="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"><a href="#这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了" class="headerlink" title="这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了"></a>这题TM居然是动态规划？我最开始的思路是模拟但结果总是掉情况，决定看题解—-只能说真是太妙了</h4><h3 id="基本思路："><a href="#基本思路：" class="headerlink" title="基本思路："></a>基本思路：</h3><p>对于模式串<code>p</code>而言，只要有一种情况能与匹配串<code>s</code>匹配即可，即对于<code>s</code>当前的位置<code>i</code>而言，只需<code>s[0]</code>到<code>s[i-1]</code>已经匹配，并且<code>s[i]</code>可以匹配即可，故可以对双指针<code>i</code>和<code>j</code>分别对匹配串<code>s</code>和模式串<code>p</code>进行遍历，<code>dp[i][j]</code>代表<code>s</code>的前<code>i</code>个字符与<code>p</code>的前<code>j</code>个是否匹配，分为以下两种情况：</p>
+<p>1.模式串当前位置<code>p[j]</code>不为<code>*</code>，则只需要<code>dp[i-1][j-1]</code>可以匹配，并且<code>s[i]</code>和<code>p[j]</code>相同或者<code>p[j]</code>为<code>?</code></p>
+<p>2.模式串当前位置<code>p[j]</code>为<code>*</code>，则对于<code>p[j-1]</code>可以有0个或者多个，即<code>dp[i][j-1]</code>匹配(多个<code>p[j-1]</code>),或者<code>dp[i-1][j]</code>匹配(0个<code>p[j]</code>)</p>
+<h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><pre class="line-numbers language-none"><code class="language-none">class Solution &#123;
+public:
+    bool isMatch(string s, string p) &#123;
+        int n &#x3D; s.size(), m &#x3D; p.size();
+        bool dp[n + 1][m + 1];
+        memset(dp, false, sizeof dp);
+        dp[0][0] &#x3D; true;
+        s &#x3D; &#39; &#39; + s;
+        p &#x3D; &#39; &#39; + p;
+
+        for (int i &#x3D; 0; i &lt;&#x3D; n; i ++ )&#123;
+            for (int j &#x3D; 1; j &lt;&#x3D; m; j ++ )&#123;
+                if (i &amp;&amp; p[j] !&#x3D; &#39;*&#39;) &#123;
+                    dp[i][j] &#x3D; dp[i - 1][j - 1] &amp;&amp; (s[i] &#x3D;&#x3D; p[j] || p[j] &#x3D;&#x3D; &#39;?&#39;);
+                &#125;else if (p[j] &#x3D;&#x3D; &#39;*&#39;) &#123;
+                    dp[i][j] &#x3D; dp[i][j - 1] || i &amp;&amp; dp[i - 1][j];&#x2F;&#x2F;为了i-1有意义故要加上判断i是否为0
+                &#125;
+            &#125;
+        &#125;
+        return dp[n][m];
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
                 
             </div>
             <hr/>
