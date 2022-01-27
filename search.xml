@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>KMP</title>
+      <link href="/2022/01/28/kmp/"/>
+      <url>/2022/01/28/kmp/</url>
+      
+        <content type="html"><![CDATA[<h3 id="前记："><a href="#前记：" class="headerlink" title="前记："></a>前记：</h3><ul><li>KMP用的很少，所以经常会忘记，故这里记录一下思路和源码</li></ul><h3 id="例子：Acwing-831-KMP字符串"><a href="#例子：Acwing-831-KMP字符串" class="headerlink" title="例子：Acwing:831. KMP字符串"></a>例子：<a href="https://www.acwing.com/problem/content/833/">Acwing:831. KMP字符串</a></h3><h3 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h3><ul><li>模式串<code>P</code>在模版串<code>S</code>中多次出现，如果对<code>S</code>中每一个位置的字符都从<code>P</code>的第一个字符串开始匹配则会浪费很多时间</li><li>KMP的思路就是先对模式串<code>P</code>进行匹配，找到<code>P</code>中每个字符没有被匹配的时候可以往前跳跃的位置，<code>S</code>也就跳跃了</li></ul><h3 id="代码："><a href="#代码：" class="headerlink" title="代码："></a>代码：</h3><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;#include &lt;cstring&gt;using namespace std;const int N &#x3D; 1e5 + 10;const int M &#x3D; 1e6 + 10;int n, m;int ne[N];&#x2F;&#x2F;char s1[N], s2[M];int main()&#123;       string s1, s2;    scanf(&quot;%d&quot;, &amp;n);    cin &gt;&gt; s1;    scanf(&quot;%d&quot;, &amp;m);    cin &gt;&gt; s2;        &#x2F;&#x2F;字符串从0开始;    ne[0] &#x3D; -1;         for(int i &#x3D; 1, j &#x3D; -1; i &lt; n; i ++)&#x2F;&#x2F;第一个不用跳    &#123;        while(j &gt;&#x3D; 0 &amp;&amp; s1[i] !&#x3D; s1[j + 1]) j &#x3D; ne[j]; &#x2F;&#x2F;当j不为-1,并且i和j+1处的字符不相同是,j进行跳跃        if(s1[i] &#x3D;&#x3D; s1[j + 1]) j ++;&#x2F;&#x2F;j不为-1,则i可以跳跃的位置为j+1；        ne[i] &#x3D; j;&#x2F;&#x2F;记录    &#125;        for(int i &#x3D; 0, j &#x3D; -1; i &lt; m; i ++)    &#123;        while (j &gt;&#x3D; 0 &amp;&amp; s2[i] !&#x3D; s1[j + 1]) j &#x3D; ne[j];&#x2F;&#x2F;当j大于0,并且串的字符不相同时,进行跳跃        if(s2[i] &#x3D;&#x3D; s1[j + 1]) j ++;        if(j &#x3D;&#x3D; n - 1)&#x2F;&#x2F;当j的值为模式串的长度时，代表匹配成功        &#123;            cout &lt;&lt; i - j &lt;&lt; &#39; &#39;; &#x2F;&#x2F; 模版串的字符所在位置减去模式串的长度即为匹配开始的位置        &#125;    &#125;        return 0;&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 字符串匹配 </tag>
+            
+            <tag> KMP </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>通配符匹配</title>
       <link href="/2022/01/25/tong-pei-fu-pi-pei/"/>
       <url>/2022/01/25/tong-pei-fu-pi-pei/</url>
