@@ -418,7 +418,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-24
+                    2022-01-29
                 </div>
                 
 
@@ -537,6 +537,42 @@ int main()
     return 0;
 &#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+<hr>
+<hr>
+<h3 id="1-29新增例子"><a href="#1-29新增例子" class="headerlink" title="1.29新增例子"></a>1.29新增例子</h3><ul>
+<li><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/the-number-of-weak-characters-in-the-game/">Leetcode:1996. 游戏中弱角色的数量</a></p>
+</li>
+<li><p>思路：                </p>
+<p>  1.我们可以先对第一个数进行从大到小排序，排序后第一个数为非严格递增的，则就可以从头开始遍历并记录此时第二个数最大的值，若在在遍历过程中存在数小于记录的最大值，则它肯定是弱角色</p>
+<p>  2.但是如果第一个数相同，而第二个数不相同，则上述算法存在漏算的问题，故在排序的过程中还要对第一个数进行分组，并将第一个相同的数根据第二个数从小到大排序，则在遍历的过程中，对于第一个数相同的数容器，会先遍历第二个数较小的</p>
+</li>
+<li><p>Leetcode代码：</p>
+</li>
+</ul>
+<pre class="line-numbers language-none"><code class="language-none">bool comparison(vector&lt;int&gt; &amp;a, vector&lt;int&gt; &amp;b)&#123;
+    if (a[0] &#x3D;&#x3D; b[0]) return a[1] &lt; b[1];
+    else return a[0] &gt; b[0];
+&#125;
+
+class Solution &#123;
+public:
+    int numberOfWeakCharacters(vector&lt;vector&lt;int&gt;&gt;&amp; properties) &#123;
+        int res &#x3D; 0;
+        sort(properties.begin(), properties.end(), comparison);
+        int max &#x3D; 0;
+        for (auto &amp;item : properties)&#123;
+            if (item[1] &lt; max)&#123;
+                res ++;
+            &#125; else &#123;
+                max &#x3D; item[1];
+            &#125;
+        &#125;
+        return res;
+    &#125;
+&#125;;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>注：在写比较函数<code>comparison</code>的时候一定要对<code>a</code>和<code>b</code>取地址，不然会超时</strong></p>
+<p><strong>注：在遍历<code>vector</code>的时候对迭代器取地址也能提速</strong></p>
 
                 
             </div>
