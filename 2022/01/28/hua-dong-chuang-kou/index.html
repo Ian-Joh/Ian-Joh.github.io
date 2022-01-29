@@ -418,7 +418,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-01-28
+                    2022-01-29
                 </div>
                 
 
@@ -497,6 +497,61 @@ int main()
     return 0;
 &#125;
 &#x2F;&#x2F;abs1231..ds123.. <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<hr>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ul>
+<li><p>把代码发给学弟之后没有<code>AC</code>，只通过了<code>69%</code>的案例，然后重新整理思路，根据题目给的数据范围，发现<code>res</code>可能会超过<code>1e9+7</code>,故<code>res</code>要开成<code>longlong</code>类型</p>
+</li>
+<li><p>修改后：</p>
+<pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+tyoedef long long int LL;
+
+int table[4];   &#x2F;&#x2F;各个种类出现的次数
+int cnt &#x3D; 0;
+LL res &#x3D; 0;
+LL l, r;   &#x2F;&#x2F;最短和最长的字符串长度
+string s;   &#x2F;&#x2F;字符串
+
+int main()
+&#123;
+    cin &gt;&gt; s;
+    cin &gt;&gt; l &gt;&gt; r;
+    int n &#x3D; s.size();
+    for (int k &#x3D; 0; k &lt; n; k ++ )&#123;  &#x2F;&#x2F;不解释
+        if (s[k] &lt;&#x3D; &#39;z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;a&#39;) s[k] &#x3D; &#39;0&#39;;
+        else if (s[k] &lt;&#x3D; &#39;Z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;A&#39;) s[k] &#x3D; &#39;1&#39;;
+        else if (s[k] &lt;&#x3D; &#39;9&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;0&#39;) s[k] &#x3D; &#39;2&#39;;
+        else s[k] &#x3D; &#39;3&#39;;
+    &#125;
+    cnt &#x3D; 0;    &#x2F;&#x2F;当前种类的数量；
+    res &#x3D; 0;    &#x2F;&#x2F;方案数
+    int i, j;
+    for (i &#x3D; 0, j &#x3D; 0; j &lt; n; j ++ )&#123;   &#x2F;&#x2F;遍历
+        int a &#x3D; s[j] - &#39;0&#39;;             &#x2F;&#x2F;当前字符所属的种类
+        table[a] ++;
+        if (table[a] &#x3D;&#x3D; 1) cnt ++;  &#x2F;&#x2F;如果++之后的结果为1，则代表之前为0，种类加一；
+        while (cnt &#x3D;&#x3D; 3)&#123;   &#x2F;&#x2F;当cnt种类为3的时候开始计算
+            LL x &#x3D; max(i + l - 1, j);  &#x2F;&#x2F;字符串最短的位置，为j和最短字符串i + l - 1之中最大的一个
+            LL y &#x3D; min(i + r - 1, n - 1);  &#x2F;&#x2F;字符串最长的位置为n - 1和最长字符串i + r - 1 中最小的一个
+            if (x &lt;&#x3D; y)&#123;    &#x2F;&#x2F;只有当最长的长度大于等于最小的时候才计算
+                res +&#x3D; (y - x + 1);
+            &#125;
+            int a &#x3D; s[i] - &#39;0&#39;; &#x2F;&#x2F;当前i所属种类
+            table[a] --;    &#x2F;&#x2F;出现次数减一
+            if (table[a] &#x3D;&#x3D; 0) cnt --;  &#x2F;&#x2F;如果此时该种类数变成0了则代表该种类已经无了
+            i ++;   &#x2F;&#x2F;i向后挪一位
+        &#125;
+    &#125;
+    cout &lt;&lt; res &lt;&lt; endl;
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 
                 
             </div>
