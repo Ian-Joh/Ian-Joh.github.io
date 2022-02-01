@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="trie, Ian-Joh">
-    <meta name="description" content="字典树优化">
+    <meta name="keywords" content="滑动窗口, Ian-Joh">
+    <meta name="description" content="双指针模拟滑动窗口">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>trie | Ian-Joh</title>
+    <title>滑动窗口 | Ian-Joh</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -265,12 +265,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">trie</h1>
+                    <h1 class="description center-align post-title">滑动窗口</h1>
                 </div>
             </div>
         </div>
@@ -386,8 +386,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                <span class="chip bg-color">字典树</span>
+                            <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                <span class="chip bg-color">滑动窗口</span>
                             </a>
                         
                     </div>
@@ -411,14 +411,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-01
+                    2022-01-28
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-01
+                    2022-01-29
                 </div>
                 
 
@@ -445,98 +445,113 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
-<li>字典树可以加快查询的速度，更快的找出符合条件的元素</li>
+                <h3 id="前记"><a href="#前记" class="headerlink" title="前记"></a>前记</h3><ul>
+<li>今天一个学弟问了我一个题，如图</li>
 </ul>
-<h3 id="基本变量"><a href="#基本变量" class="headerlink" title="基本变量"></a>基本变量</h3><pre class="line-numbers language-none"><code class="language-none">int idx; &#x2F;&#x2F;下标，从1开始,0为判断为空的条件
-char e[N]; &#x2F;&#x2F;用来记录idx位置的字符
-int ne[N][26]; &#x2F;&#x2F;下一个的地址(idx)此处以字符串为例,共有26个字母<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="基本插入操作"><a href="#基本插入操作" class="headerlink" title="基本插入操作"></a>基本插入操作</h3><pre class="line-numbers language-none"><code class="language-none">void insert(string s)&#123; &#x2F;&#x2F;s为插入的字符串
-	int p &#x3D; 0; &#x2F;&#x2F;0为根结点
-	int u; &#x2F;&#x2F;将26个英文字母映射到数字0-25上，用u表示
-	for(int i &#x3D; 0; i &lt; (int)s.size(); i ++ )&#123;
-		u &#x3D; s[i] - &#39;a&#39; &#x2F;&#x2F;转换
-		e[++ idx] &#x3D; s[i];
-		if (ne[p][u] &#x3D;&#x3D; 0) ne[p][u] &#x3D; idx;
-		p &#x3D; ne[p][u];
-	&#125;
-	op; &#x2F;&#x2F; 此处为操作，这时p已经指向字符串最后一个字符
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="基本查询操作"><a href="#基本查询操作" class="headerlink" title="基本查询操作"></a>基本查询操作</h3><pre class="line-numbers language-none"><code class="language-none">int query(string s)&#123;
-	int res; &#x2F;&#x2F; 结果
-	int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(ne[p][u] &#x3D;&#x3D; 0) return 0;&#x2F;&#x2F;此处的结果若为零，则代表此处被插入时没有被遍历到
-        p &#x3D; ne[p][u];
-    &#125;
-    return res;&#x2F;&#x2F;结果，自操作
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/837/">Acwing:835. Trie字符串统计</a></p>
-</li>
-<li><p>代码：</p>
-</li>
+<p><img src="/medias/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/1.jpg" alt="题目"></p>
+<h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>对于某个字符串而言，如果他满足题目要求，在限制在[L, R]内的所有长度大于该字符串的字符串都满足条件</li>
+<li>故用双指针模拟滑动窗口，找出字符串中每个字符，以其为起始位置的长度最短的满足条件的结束位置</li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
 
 using namespace std;
 
-const int N &#x3D; 1e5 + 10;
-
-int n, idx;
-string s;
-char op;
-
-int cnt[N], son[N][26];
-
-void insert(string s)
-&#123;
-    int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(son[p][u] &#x3D;&#x3D; 0) son[p][u] &#x3D; ++ idx;
-        p &#x3D; son[p][u];
-    &#125;
-    cnt[p] ++;
-&#125;
-
-int query(string s)
-&#123;
-    int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(son[p][u] &#x3D;&#x3D; 0) return 0;
-        p &#x3D; son[p][u];
-    &#125;
-    return cnt[p];
-&#125;
+int table[4];   &#x2F;&#x2F;各个种类出现的次数
+int cnt, res;
+int l, r;   &#x2F;&#x2F;最短和最长的字符串长度
+string s;   &#x2F;&#x2F;字符串
 
 int main()
 &#123;
-    scanf(&quot;%d&quot;, &amp;n);
-    
-    while(n --)
-    &#123;
-        cin &gt;&gt; op &gt;&gt; s;
-        if(op &#x3D;&#x3D; &#39;I&#39;) insert(s);
-        else cout &lt;&lt; query(s) &lt;&lt; endl;
+    cin &gt;&gt; s;
+    cin &gt;&gt; l &gt;&gt; r;
+    int n &#x3D; s.size();
+    for (int k &#x3D; 0; k &lt; n; k ++ )&#123;  &#x2F;&#x2F;不解释
+        if (s[k] &lt;&#x3D; &#39;z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;a&#39;) s[k] &#x3D; &#39;0&#39;;
+        else if (s[k] &lt;&#x3D; &#39;Z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;A&#39;) s[k] &#x3D; &#39;1&#39;;
+        else if (s[k] &lt;&#x3D; &#39;9&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;0&#39;) s[k] &#x3D; &#39;2&#39;;
+        else s[k] &#x3D; &#39;3&#39;;
     &#125;
+    cnt &#x3D; 0;    &#x2F;&#x2F;当前种类的数量；
+    res &#x3D; 0;    &#x2F;&#x2F;方案数
+    int i, j;
+    for (i &#x3D; 0, j &#x3D; 0; j &lt; n; j ++ )&#123;   &#x2F;&#x2F;遍历
+        int a &#x3D; s[j] - &#39;0&#39;;             &#x2F;&#x2F;当前字符所属的种类
+        table[a] ++;
+        if (table[a] &#x3D;&#x3D; 1) cnt ++;  &#x2F;&#x2F;如果++之后的结果为1，则代表之前为0，种类加一；
+        while (cnt &#x3D;&#x3D; 3)&#123;   &#x2F;&#x2F;当cnt种类为3的时候开始计算
+            int x &#x3D; max(i + l - 1, j);  &#x2F;&#x2F;字符串最短的位置，为j和最短字符串i + l - 1之中最大的一个
+            int y &#x3D; min(i + r - 1, n - 1);  &#x2F;&#x2F;字符串最长的位置为n - 1和最长字符串i + r - 1 中最小的一个
+            if (x &lt;&#x3D; y)&#123;    &#x2F;&#x2F;只有当最长的长度大于等于最小的时候才计算
+                res +&#x3D; (y - x + 1);
+            &#125;
+            int a &#x3D; s[i] - &#39;0&#39;; &#x2F;&#x2F;当前i所属种类
+            table[a] --;    &#x2F;&#x2F;出现次数减一
+            if (table[a] &#x3D;&#x3D; 0) cnt --;  &#x2F;&#x2F;如果此时该种类数变成0了则代表该种类已经无了
+            i ++;   &#x2F;&#x2F;i向后挪一位
+        &#125;
+    &#125;
+    cout &lt;&lt; res &lt;&lt; endl;
     return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+&#125;
+&#x2F;&#x2F;abs1231..ds123.. <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
+<hr>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><ul>
+<li><p>把代码发给学弟之后没有<code>AC</code>，只通过了<code>69%</code>的案例，然后重新整理思路，根据题目给的数据范围，发现<code>res</code>可能会超过<code>1e9+7</code>,故<code>res</code>要开成<code>longlong</code>类型</p>
+</li>
+<li><p>修改后：</p>
+<pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+tyoedef long long int LL;
+
+int table[4];   &#x2F;&#x2F;各个种类出现的次数
+int cnt &#x3D; 0;
+LL res &#x3D; 0;
+LL l, r;   &#x2F;&#x2F;最短和最长的字符串长度
+string s;   &#x2F;&#x2F;字符串
+
+int main()
+&#123;
+    cin &gt;&gt; s;
+    cin &gt;&gt; l &gt;&gt; r;
+    int n &#x3D; s.size();
+    for (int k &#x3D; 0; k &lt; n; k ++ )&#123;  &#x2F;&#x2F;不解释
+        if (s[k] &lt;&#x3D; &#39;z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;a&#39;) s[k] &#x3D; &#39;0&#39;;
+        else if (s[k] &lt;&#x3D; &#39;Z&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;A&#39;) s[k] &#x3D; &#39;1&#39;;
+        else if (s[k] &lt;&#x3D; &#39;9&#39; &amp;&amp; s[k] &gt;&#x3D; &#39;0&#39;) s[k] &#x3D; &#39;2&#39;;
+        else s[k] &#x3D; &#39;3&#39;;
+    &#125;
+    cnt &#x3D; 0;    &#x2F;&#x2F;当前种类的数量；
+    res &#x3D; 0;    &#x2F;&#x2F;方案数
+    int i, j;
+    for (i &#x3D; 0, j &#x3D; 0; j &lt; n; j ++ )&#123;   &#x2F;&#x2F;遍历
+        int a &#x3D; s[j] - &#39;0&#39;;             &#x2F;&#x2F;当前字符所属的种类
+        table[a] ++;
+        if (table[a] &#x3D;&#x3D; 1) cnt ++;  &#x2F;&#x2F;如果++之后的结果为1，则代表之前为0，种类加一；
+        while (cnt &#x3D;&#x3D; 3)&#123;   &#x2F;&#x2F;当cnt种类为3的时候开始计算
+            LL x &#x3D; max(i + l - 1, j);  &#x2F;&#x2F;字符串最短的位置，为j和最短字符串i + l - 1之中最大的一个
+            LL y &#x3D; min(i + r - 1, n - 1);  &#x2F;&#x2F;字符串最长的位置为n - 1和最长字符串i + r - 1 中最小的一个
+            if (x &lt;&#x3D; y)&#123;    &#x2F;&#x2F;只有当最长的长度大于等于最小的时候才计算
+                res +&#x3D; (y - x + 1);
+            &#125;
+            int a &#x3D; s[i] - &#39;0&#39;; &#x2F;&#x2F;当前i所属种类
+            table[a] --;    &#x2F;&#x2F;出现次数减一
+            if (table[a] &#x3D;&#x3D; 0) cnt --;  &#x2F;&#x2F;如果此时该种类数变成0了则代表该种类已经无了
+            i ++;   &#x2F;&#x2F;i向后挪一位
+        &#125;
+    &#125;
+    cout &lt;&lt; res &lt;&lt; endl;
+    return 0;
+&#125;
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
 
                 
             </div>
@@ -551,8 +566,8 @@ int main()
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                    <span class="chip bg-color">字典树</span>
+                                <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
+                                    <span class="chip bg-color">滑动窗口</span>
                                 </a>
                             
                         </div>
@@ -605,56 +620,6 @@ int main()
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2022/02/01/trie/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="trie">
-                        
-                        <span class="card-title">trie</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            字典树优化
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-01
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                        <span class="chip bg-color">字典树</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
                 <a href="/2022/01/28/hua-dong-chuang-kou/">
                     <div class="card-image">
                         
@@ -686,11 +651,65 @@ int main()
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
                     <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
                         <span class="chip bg-color">滑动窗口</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2022/01/28/kmp/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="KMP">
+                        
+                        <span class="card-title">KMP</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            模式串匹配模版串
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
+                                    算法
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">
+                        <span class="chip bg-color">字符串匹配</span>
+                    </a>
+                    
+                    <a href="/tags/KMP/">
+                        <span class="chip bg-color">KMP</span>
                     </a>
                     
                 </div>

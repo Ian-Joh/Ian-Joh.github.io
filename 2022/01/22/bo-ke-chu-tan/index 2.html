@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="trie, Ian-Joh">
-    <meta name="description" content="字典树优化">
+    <meta name="keywords" content="博客初探, Ian-Joh">
+    <meta name="description" content="新手如何搭建自己的博客">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>trie | Ian-Joh</title>
+    <title>博客初探 | Ian-Joh</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
@@ -265,12 +265,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">trie</h1>
+                    <h1 class="description center-align post-title">博客初探</h1>
                 </div>
             </div>
         </div>
@@ -386,8 +386,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                <span class="chip bg-color">字典树</span>
+                            <a href="/tags/blog/">
+                                <span class="chip bg-color">blog</span>
+                            </a>
+                        
+                            <a href="/tags/%E5%85%A5%E9%97%A8/">
+                                <span class="chip bg-color">入门</span>
                             </a>
                         
                     </div>
@@ -398,8 +402,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                算法
+                            <a href="/categories/%E5%8D%9A%E5%AE%A2/" class="post-category">
+                                博客
                             </a>
                         
                     </div>
@@ -411,14 +415,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-02-01
+                    2022-01-22
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-02-01
+                    2022-01-22
                 </div>
                 
 
@@ -445,98 +449,146 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h3><ul>
-<li>字典树可以加快查询的速度，更快的找出符合条件的元素</li>
-</ul>
-<h3 id="基本变量"><a href="#基本变量" class="headerlink" title="基本变量"></a>基本变量</h3><pre class="line-numbers language-none"><code class="language-none">int idx; &#x2F;&#x2F;下标，从1开始,0为判断为空的条件
-char e[N]; &#x2F;&#x2F;用来记录idx位置的字符
-int ne[N][26]; &#x2F;&#x2F;下一个的地址(idx)此处以字符串为例,共有26个字母<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="基本插入操作"><a href="#基本插入操作" class="headerlink" title="基本插入操作"></a>基本插入操作</h3><pre class="line-numbers language-none"><code class="language-none">void insert(string s)&#123; &#x2F;&#x2F;s为插入的字符串
-	int p &#x3D; 0; &#x2F;&#x2F;0为根结点
-	int u; &#x2F;&#x2F;将26个英文字母映射到数字0-25上，用u表示
-	for(int i &#x3D; 0; i &lt; (int)s.size(); i ++ )&#123;
-		u &#x3D; s[i] - &#39;a&#39; &#x2F;&#x2F;转换
-		e[++ idx] &#x3D; s[i];
-		if (ne[p][u] &#x3D;&#x3D; 0) ne[p][u] &#x3D; idx;
-		p &#x3D; ne[p][u];
-	&#125;
-	op; &#x2F;&#x2F; 此处为操作，这时p已经指向字符串最后一个字符
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="基本查询操作"><a href="#基本查询操作" class="headerlink" title="基本查询操作"></a>基本查询操作</h3><pre class="line-numbers language-none"><code class="language-none">int query(string s)&#123;
-	int res; &#x2F;&#x2F; 结果
-	int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(ne[p][u] &#x3D;&#x3D; 0) return 0;&#x2F;&#x2F;此处的结果若为零，则代表此处被插入时没有被遍历到
-        p &#x3D; ne[p][u];
-    &#125;
-    return res;&#x2F;&#x2F;结果，自操作
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><ul>
-<li><p><a target="_blank" rel="noopener" href="https://www.acwing.com/problem/content/837/">Acwing:835. Trie字符串统计</a></p>
+                <p>马上就是新年了，我也即将研二下学期，准备为实习做些东西、学点东西，于是开始写博客记录一下过程，第一次搭建博客，也走了不少弯路，花了不少时间，先介绍一哈我的电脑是mac的，全程使用的终端，部署在github上。</p>
+<p><strong>STAR-&gt;&gt;&gt;</strong></p>
+<h3 id="搭建博客"><a href="#搭建博客" class="headerlink" title="搭建博客"></a>搭建博客</h3><h4 id="Github的创建以及Git的安装"><a href="#Github的创建以及Git的安装" class="headerlink" title="Github的创建以及Git的安装"></a><code>Github</code>的创建以及<code>Git</code>的安装</h4><p>这是基本，计算机er都会-&gt;</p>
+<h4 id="nodejs和hexo的安装"><a href="#nodejs和hexo的安装" class="headerlink" title="nodejs和hexo的安装"></a><code>nodejs</code>和<code>hexo</code>的安装</h4><ul>
+<li><p><code>nodejs</code><a target="_blank" rel="noopener" href="https://nodejs.org/en/">官网下载</a>,进去后选择自己的系统下载即可</p>
 </li>
-<li><p>代码：</p>
+<li><p><code>hexo</code>下载，此处用终端命令下载</p>
+<pre class="line-numbers language-none"><code class="language-none">$ npm install -g hexo-cli<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+<h4 id="创建一个博客"><a href="#创建一个博客" class="headerlink" title="创建一个博客"></a>创建一个博客</h4><ul>
+<li><p>先创建一个文件夹用来放博客(比如我放在桌面的$blog中)</p>
+<pre class="line-numbers language-none"><code class="language-none">$ cd Desktop
+$ mkdir blog
+$ cd blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>初始化博客<br><code>$ hexo init</code></p>
+</li>
+<li><p>静态部署博客<br><code>$ hexo g</code></p>
+</li>
+<li><p>部署在本地服务器<br><code>$ hexo s</code></p>
+</li>
+<li><p>进入<code>http://localhost:4000</code>查看</p>
 </li>
 </ul>
-<pre class="line-numbers language-none"><code class="language-none">#include &lt;iostream&gt;
-#include &lt;cstring&gt;
+<h4 id="部署博客到Github"><a href="#部署博客到Github" class="headerlink" title="部署博客到Github"></a>部署博客到<code>Github</code></h4><ul>
+<li><p>在<code>Github</code>创建新的仓库，命名为 “<code>你的仓库名字</code>.github.io”<br><img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/1.jpg" alt="图片">  </p>
+</li>
+<li><p>绑定<code>ssh key</code></p>
+<p>1.确定你的电脑是否有<code>ssh key</code></p>
+  <pre class="line-numbers language-none"><code class="language-none">$ cd ~&#x2F;.ssh<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  如果找不到文件夹就是不存在进入步骤2，存在则进入步骤3</p>
+<p>2.创建一个<code>ssh key</code></p>
+  <pre class="line-numbers language-none"><code class="language-none">$ ssh-keygen -t rsa -C &quot;your_email@example.com&quot;&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>  之后的设置是设置密码和位置一类的，直接回车即可，想要设置的也可以查看参数自己设置</p>
+<p>3.复制你的<code>ssh key</code>到<code>github上</code>,路径为<code>~/.ssh/id_rsa.pub</code>，随后登陆你的github，在右上的个人中添加公钥</p>
+<p>  <img src="/medias/%E5%8D%9A%E5%AE%A2%E5%88%9D%E6%8E%A2/2.jpg" alt="图片"></p>
+<p>  点击<code>new</code>即可</p>
+</li>
+<li><p>在博客的目录下修改<code>_config.yml</code>来更改博客的配置</p>
+<p>1.打开配置文件<br>  <code>$ vim _config.yml</code></p>
+<p>2.<code>G</code>到底部，修改url为你的github地址</p>
+  <pre class="line-numbers language-none"><code class="language-none">deploy:
+type: git
+repository: git@github.com:Ian-Joh&#x2F;Ian-Joh.github.io.git  #你的仓库SSH地址
+branch: main #你的分支<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>部署博客到<code>Github</code>上</p>
+<blockquote>
+<p>老三件套</p>
+<pre class="line-numbers language-none"><code class="language-none">hexo clean #清除文件
+hexo g #静态部署
+hexo d #发布<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></blockquote>
+</li>
+</ul>
+<p><strong>至此博客搭建完毕</strong></p>
+<h4 id="增加主题"><a href="#增加主题" class="headerlink" title="增加主题"></a>增加主题</h4><p>本博客使用的是hexo-theme-matery,具体查看<a target="_blank" rel="noopener" href="https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md">Github地址</a></p>
+<hr>
+<center> **华丽的分界线** </center>
 
-using namespace std;
+<hr>
+<h3 id="写第一个博客"><a href="#写第一个博客" class="headerlink" title="写第一个博客"></a>写第一个博客</h3><p>部署之后我们来开始写第一篇文章，内容分为三类，分别是草稿、文章和页面，此处只记录草稿<code>post</code>，</p>
+<ul>
+<li><p>使用hexo命令，后面接文章的命名，如‘test’</p>
+<pre class="line-numbers language-none"><code class="language-none">$ hexo new post test<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-const int N &#x3D; 1e5 + 10;
-
-int n, idx;
-string s;
-char op;
-
-int cnt[N], son[N][26];
-
-void insert(string s)
-&#123;
-    int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(son[p][u] &#x3D;&#x3D; 0) son[p][u] &#x3D; ++ idx;
-        p &#x3D; son[p][u];
-    &#125;
-    cnt[p] ++;
-&#125;
-
-int query(string s)
-&#123;
-    int p &#x3D; 0;
-    int u;
-    for(int i &#x3D; 0; i &lt; s.size(); i ++)
-    &#123;
-        u &#x3D; s[i] - &#39;a&#39;;
-        if(son[p][u] &#x3D;&#x3D; 0) return 0;
-        p &#x3D; son[p][u];
-    &#125;
-    return cnt[p];
-&#125;
-
-int main()
-&#123;
-    scanf(&quot;%d&quot;, &amp;n);
-    
-    while(n --)
-    &#123;
-        cin &gt;&gt; op &gt;&gt; s;
-        if(op &#x3D;&#x3D; &#39;I&#39;) insert(s);
-        else cout &lt;&lt; query(s) &lt;&lt; endl;
-    &#125;
-    return 0;
-&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+<p>之后可以在<code>./source/_post</code>内看到新建的md文件</p>
+</li>
+<li><p>编辑md，使用markdown打开，两个<code>--</code>之间的就是文章的属性，主要的选项功能如下表所示</p>
+<table>
+<thead>
+<tr>
+<th align="left">配置选项</th>
+<th align="left">默认值</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">title</td>
+<td align="left">Markdown文章名</td>
+<td align="left">文章的标题</td>
+</tr>
+<tr>
+<td align="left">date</td>
+<td align="left">time</td>
+<td align="left">发布时间，强烈建议填写此选项，且最好保证全局唯一</td>
+</tr>
+<tr>
+<td align="left">author</td>
+<td align="left">none</td>
+<td align="left">文章作者</td>
+</tr>
+<tr>
+<td align="left">top</td>
+<td align="left">false</td>
+<td align="left">推荐文章（文章是否置顶），如果 top 值为 true，则会作为首页推荐文章</td>
+</tr>
+<tr>
+<td align="left">hide</td>
+<td align="left">false</td>
+<td align="left">隐藏文章，如果hide值为true，则文章不会在首页显示</td>
+</tr>
+<tr>
+<td align="left">cover</td>
+<td align="left">false</td>
+<td align="left">表示该文章是否需要加入到首页轮播封面中</td>
+</tr>
+<tr>
+<td align="left">mathjax</td>
+<td align="left">none</td>
+<td align="left">是否开启数学公式支持 ，本文章是否开启 mathjax，且需要在主题的 _config.yml 文件中也需要开启才行</td>
+</tr>
+<tr>
+<td align="left">summary</td>
+<td align="left">none</td>
+<td align="left">文章摘要，自定义的文章摘要内容，如果这个属性有值，文章卡片摘要就显示这段文字，否则程序会自动截取文章的部分内容作为摘要</td>
+</tr>
+<tr>
+<td align="left">categories</td>
+<td align="left">none</td>
+<td align="left">文章分类，本主题的分类表示宏观上大的分类，只建议一篇文章一个分类</td>
+</tr>
+<tr>
+<td align="left">tags</td>
+<td align="left">none</td>
+<td align="left">文章标签，一篇文章可以多个标签</td>
+</tr>
+</tbody></table>
+<p>  例如：</p>
+  <pre class="line-numbers language-none"><code class="language-none">title: test
+date: 2022-01-22 16:43:04
+author: Jingtao Fan
+top: false 
+cover: false
+hide: false
+categories: cat
+mathjax: false
+summary: This is a summary
+tags: 
+  - first
+  - second<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<p>** 如此就可以开始写你的第一篇文章辣 **</p>
 
                 
             </div>
@@ -551,8 +603,12 @@ int main()
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                                    <span class="chip bg-color">字典树</span>
+                                <a href="/tags/blog/">
+                                    <span class="chip bg-color">blog</span>
+                                </a>
+                            
+                                <a href="/tags/%E5%85%A5%E9%97%A8/">
+                                    <span class="chip bg-color">入门</span>
                                 </a>
                             
                         </div>
@@ -600,30 +656,29 @@ int main()
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/02/01/trie/">
+                <a href="/2022/01/23/zi-ding-yi-bi-jiao-han-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="trie">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="排序非数字类型">
                         
-                        <span class="card-title">trie</span>
+                        <span class="card-title">排序非数字类型</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            字典树优化
+                            用于比较数组和vector<int>以外类型
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-02-01
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2022-01-23
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -636,12 +691,11 @@ int main()
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%AD%97%E5%85%B8%E6%A0%91/">
-                        <span class="chip bg-color">字典树</span>
+                    <a href="/tags/%E6%8E%92%E5%BA%8F/">
+                        <span class="chip bg-color">排序</span>
                     </a>
                     
                 </div>
@@ -655,44 +709,32 @@ int main()
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/01/28/hua-dong-chuang-kou/">
+                <a href="/2022/01/21/hello-world/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="滑动窗口">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
                         
-                        <span class="card-title">滑动窗口</span>
+                        <span class="card-title">Hello World</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            双指针模拟滑动窗口
+                            
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-01-21
                             </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/%E7%AE%97%E6%B3%95/" class="post-category">
-                                    算法
-                                </a>
-                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Jingtao Fan
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E6%BB%91%E5%8A%A8%E7%AA%97%E5%8F%A3/">
-                        <span class="chip bg-color">滑动窗口</span>
-                    </a>
-                    
                 </div>
                 
             </div>
